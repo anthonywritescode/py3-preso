@@ -1,6 +1,7 @@
 language: python
 python: '3.5'
 script: make
+install: pip install virtualenv
 after_success: ./push-to-gh.sh
 branches:
     except:
