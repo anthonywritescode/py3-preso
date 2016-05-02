@@ -14,7 +14,9 @@ popd
 
 make
 mkdir -p demo/assets
-cp assets/*.png assets/*.css demo/assets
+mkdir -p demo/bower_components
+cp assets/*{.css,.png} demo/assets
+cp -r bower_components/{reveal.js,highlightjs,jquery} demo/bower_components
 cp index.htm demo
 cp .travis.yml demo/
 
