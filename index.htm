@@ -2,22 +2,17 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.min.css">
-        <link rel="stylesheet" href="bower_components/highlightjs/styles/idea.css">
-        <link rel="stylesheet" href="assets/reveal.css">
-        <link rel="stylesheet" href="assets/presentation.css">
-
-        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
-        <script>
-            document.write( '<link rel="stylesheet" href="bower_components/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-        </script>
+        <link rel="stylesheet" href="build/reveal.min.css">
+        <link rel="stylesheet" href="build/idea.css">
+        <link rel="stylesheet" href="build/reveal.css">
+        <link rel="stylesheet" href="build/presentation.css">
     </head>
 
     <body>
         <div class="reveal">
             <div class="slides">
                 <section>
-                    <img src="assets/python-logo.png" style="float: left">
+                    <img src="build/python-logo.png" style="float: left">
                     <h2>python3</h2>
                     <h3>an intro</h3>
                 </section>
@@ -300,9 +295,9 @@ AttributeError: 'str' object has no attribute 'decode'
             </div>
         </div>
 
-        <script src="bower_components/jquery/jquery.min.js"></script>
-        <script src="bower_components/reveal.js/js/reveal.min.js"></script>
-        <script src="bower_components/highlightjs/highlight.pack.js"></script>
+        <script src="build/jquery.min.js"></script>
+        <script src="build/reveal.min.js"></script>
+        <script src="build/highlight.pack.js"></script>
         <script type="text/javascript">
             Reveal.initialize({
                 history: true,
