@@ -277,6 +277,27 @@ AttributeError: 'str' object has no attribute 'decode'
                     <p>To work with text objects, generally pick some higher-level abstraction such as the <code>requests</code> library.</p>
                 </section>
                 <section>
+                    <h2>c extensions</h2>
+                    Realtively rare that you'll need to do this.
+                    <pre><code>#if PY_MAJOR_VERSION >= 3
+#define PySass_IF_PY3(three, two) (three)
+#define PySass_Int_FromLong(v) PyLong_FromLong(v)
+#define PySass_Bytes_AS_STRING(o) PyBytes_AS_STRING(o)
+#define PySass_Object_Bytes(o) PyUnicode_AsUTF8String(PyObject_Str(o))
+#else
+#define PySass_IF_PY3(three, two) (two)
+#define PySass_Int_FromLong(v) PyInt_FromLong(v)
+#define PySass_Bytes_AS_STRING(o) PyString_AS_STRING(o)
+#define PySass_Object_Bytes(o) PyObject_Str(o)
+#endif
+
+/* ... */
+
+PyObject* py_result = PyObject_CallFunction(pyfunc, PySass_IF_PY3("y", "s"), path);
+PyObject* signature = PySass_Object_Bytes(sass_function);
+</code></pre>
+                </section>
+                <section>
                     <h2>failures of py3</h2>
                     They couldn't get everything right!
                     <ul>
