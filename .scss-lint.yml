@@ -1,0 +1,11 @@
+linters:
+  NameFormat:
+    exclude:
+      - 'assets/reveal.scss'
+  MergeableSelector:
+    enabled: false
+  SelectorDepth:
+    exclude:
+      - 'assets/reveal.scss'
+  ColorVariable:
+    enabled: false
