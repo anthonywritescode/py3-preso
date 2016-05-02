@@ -1,1 +1,319 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="bower_components/reveal.js/css/reveal.min.css">
+        <link rel="stylesheet" href="bower_components/highlightjs/styles/idea.css">
+        <link rel="stylesheet" href="assets/reveal.css">
+        <link rel="stylesheet" href="assets/presentation.css">
 
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+            document.write( '<link rel="stylesheet" href="bower_components/reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+    </head>
+
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <img src="assets/python-logo.png" style="float: left">
+                    <h2>python3</h2>
+                    <h3>an intro</h3>
+                </section>
+                <section>
+                    <h3>outline</h3>
+                    <ul>
+                        <li>definitions</li>
+                        <li>application structure</li>
+                        <li>changes + porting strategies</li>
+                    </ul>
+                </section>
+                <section>
+                    <h1>definitions</h1>
+                </section>
+                <section>
+                    <h2>definitions: quick ones</h2>
+                    <ul>
+                        <li>py2: python2.x (realistically 2.7)</li>
+                        <li>py3: python3.x (realistically >=3.3)</li>
+                        <li>py2+py3: code crafted to run under both versions</li>
+                        <li>six: a pretty-bare-bones python module for 2+3 compatibilty</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>definitions: text</h2>
+                    <ul>
+                        <li>human representation</li>
+                        <li><code>"abc☃💩🐵"</code></li>
+                        <li>string operations (slicing, replacing) are meaningful</li>
+                        <li>py2: <code>unicode</code>, py3: <code>str</code></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>definitions: bytes</h2>
+                    <ul>
+                        <li>computer representation of text</li>
+                        <li><code>b'abc\xe2\x98\x83\xf0\x9f\x92\xa9\xf0\x9f\x90\xb5'</code></li>
+                        <li>string operations not meaningful (may break a character)</li>
+                        <li>py2: <code>bytes (str)</code>, py3: <code>bytes</code></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>definitons: native string</h2>
+                    <ul>
+                        <li>the default string type used by that python version</li>
+                        <li>most stdlib apis written against this type</li>
+                        <li>py2 + py3: <code>str</code> (convenient!)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h1>application structure</h1>
+                </section>
+                <section>
+                    <div class="blob" style="background-color: #c22;">
+                        <h2>outside world</h2>
+                    </div>
+                    <div class="interfaces">
+                        <div>interfaces</div>
+                    </div>
+                    <div class="blob" style="background-color: #4078c0;">
+                        <h2>app</h2>
+                    </div>
+                </section>
+                <section>
+                    <h2>interfaces</h2>
+                    <ul>
+                        <li>network, filesystem, camera, etc.</li>
+                        <li>all speak in <code>byte</code>s</li>
+                        <li>encode to talk to them</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>application</h2>
+                    <ul>
+                        <li>collect data from interfaces</li>
+                        <li>compute business logic</li>
+                        <li>decode data from interfaces to use</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>how?</h2>
+                    <ul>
+                        <li>convert to bytes at boundaries</li>
+                        <li>deal with text internally</li>
+                        <li>pretty hard in py2! (we'll get to this)</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>porting strategies</h2>
+                    <h3>to py2+py3 and beyond!</h3>
+                </section>
+                <section>
+                    <h2>at a high level</h2>
+                    <ol>
+                        <li>syntax passes</li>
+                        <li>linting passes</li>
+                        <li>importable</li>
+                        <li>tests pass</li>
+                    </ol>
+                </section>
+                <section>
+                    <h1>changes!</h1>
+                </section>
+                <section>
+                    <h2>feature flags</h2>
+                    <ul>
+                        <li>new py3 features - enable them in py2 via flags</li>
+                        <li>enabled via imports from the <code>__future__</code> module</li>
+                        <li>easiest steps to writing py2+py3 compatible code</li>
+                        <li>turn on the flags on a per-module basis</li>
+                    </ul>
+                </section>
+                <section>
+                    <code>from __future__ import unicode_literals</code>
+                    <hr>
+                    The default type for string literals in code becomes text.
+                    In python2, strings were by-default <code>bytes</code>.
+                    To explicitly make a <code>bytes</code> literal, use the <code>b''</code> prefix.
+                </section>
+                <section>
+                    <code>from __future__ import absolute_import</code>
+                    <hr>
+                    <ul>
+                        <li>Imports always start from <code>sys.path</code> roots.</li>
+                        <li>Importing a module <code>x</code> becomes unambiguous</li>
+                        <li>Adding a module can't break other modules' imports</li>
+                    </ul>
+                </section>
+                <section>
+                    <code>from __future__ import print_function</code>
+                    <hr>
+                    <ul>
+                        <li><code>print x</code></li>
+                        <li>becomes: <code>print(x)</code></li>
+                        <li><code>print >>sys.stderr, x</code></li>
+                        <li>becomes: <code>print(x, file=sys.stderr)</code></li>
+                    </ul>
+                </section>
+                <section>
+                    <code>from __future__ import divison</code>
+                    <hr>
+                    Not often as relevant.  Division changes to floating point
+                    division by default in python3.  Use <code>x // y</code> to explicitly do integer division.
+                </section>
+                <section>
+                    <h2>moves</h2>
+                    <p>
+                        Many modules were non-pep8 named or poorly organized
+                        and were moved in py3.  A few examples:
+                    </p>
+                    <ul>
+                        <li><code>ConfigParser</code> -> <code>configparser</code></li>
+                        <li><code>urlparse / urllib / urllib2</code> -> <code>urllib.parse, urllib.request, urllib.response</code></li>
+                        <li><code>SimpleHTTPServer</code> -> <code>http.server</code></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>moves (cont.)</h2>
+                    <code>six.moves</code> provides easy access to the moved modules.
+                    <pre><code>from six.moves.urllib_error import URLError
+from six.moves import range
+</code></pre>
+                </section>
+                <section>
+                    <h2>iterators</h2>
+                    Many things which returned lists in py2 now return iterators.  <code>xrange</code> is gone and <code>range</code> is now an iterator.
+                    <code>dict</code>s lose the <code>.iter{items,keys,values}()</code> functions.
+                </section>
+                <section>
+                    <h2>iterators (cont.)</h2>
+                    <ul>
+                        <li>Often the iter{...} functions were faster in py2 than their list counterparts.  Sometimes not!</li>
+                        <li>If you're not terribly concerned about performance in py2, switch to use the py3 names (<code>range</code>, <code>.items()</code>, etc.).</li>
+                        <li>If you're concerned about perforamnce, <code>six</code> provides helpers like <code>six.iteritems(dict_obj)</code> to use iterators in 2+3</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>explicit string types</h2>
+                    In python 2, adding a <code>str</code> object to a <code>unicode</code> object often just worked.
+                    In py2, implicit conversion between <code>bytes</code> and <code>text</code> was allowed via the <code>US-ASCII</code> encoding.
+                    <pre><code># py2
+>>> 'foo' + u'☃'  # Implicitly 'foo'.decode('US-ASCII') + u'☃'
+u'foo\u2603'
+>>> '💩' + u'hi'  # Implicitly '💩'.decode('US-ASCII') + u'hi'
+...
+UnicodeDecodeError: 'ascii' codec can't decode byte 0xf0 in position 0: ordinal not in range(128)
+>>> u'💩'.decode('UTF-8')  # implicitly u'💩'.encode('US-ASCII').decode('UTF-8')
+...
+UnicodeEncodeError: 'ascii' codec can't encode character u'\U0001f4a9' in position 0: ordinal not in range(128)
+</code></pre>
+                    Each of these are a <b>western bias</b>!
+                </section>
+                <section>
+                    <h2>explicit string types</h2>
+                    In python3, the <code>bytes</code> and <code>text</code> types are explicitly separated.
+                    Mismatching of the two types is a <code>TypeError</code>
+                    <pre><code># py3
+>>> b'' + ''
+TypeError: can't concat bytes to str
+>>> '☃'.decode('UTF-8')
+...
+AttributeError: 'str' object has no attribute 'decode'
+</code></pre>
+                </section>
+                <section>
+                    <h2>explicit bytes type</h2>
+                    <ul>
+                        <li>The <code>bytes</code> type in py2 gives the illusion that it is a useful string type.  Iterating it returns you 1-length bytes objects.</li>
+                        <li>In py3, iterating a <code>bytes</code> object gives you integers (each byte)</li>
+                        <li><code>six</code> provides shims; ex: <code>six.iterbytes(...)</code></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>text apis everywhere!</h2>
+                    The stdlib (wherever possible) now requires text objects where it previously allowed either <code>bytes</code> or <code>text</code>.
+                    This makes it easier to write a correct application which deals with text internally.
+                </section>
+                <section>
+                    <h2>cheat sheet for string types</h2>
+                    <table class="table">
+                        <thead><tr><td>have</td><td>want</td><td>code</td></tr></thead>
+                        <tr>
+                            <td>text</td>
+                            <td>bytes</td>
+                            <td><code>x.encode('UTF-8')</code></td>
+                        </tr>
+                        <tr>
+                            <td>bytes</td>
+                            <td>text</td>
+                            <td><code>x.decode('UTF-8')</code></td>
+                        </tr>
+                        <tr>
+                            <td>object (int, etc.)</td>
+                            <td>text</td>
+                            <td><code>six.text_type(x)</code></td>
+                        </tr>
+                    </table>
+                </section>
+                <section>
+                    <h2>files</h2>
+                    <ul>
+                        <li>In py2 <code>open</code> yielded <code>bytes</code>, in py3, <code>open</code> gives you <code>text</code></li>
+                        <li>Use <code>io.open</code> to get the python3 behaviour in python2</li>
+                    </ul>
+                    <pre><code>with io.open('f.txt', encoding='UTF-8') as f:
+    # ...
+</code></pre>
+                </section>
+                <section>
+                    <h2>subprocesses</h2>
+                    <p>subprocesses always return <code>bytes</code>.  <code>.decode()</code> their output to get text</p>
+                    <pre><code>x = subprocess.check_output(('echo', 'hi')).decode('UTF-8'))</code></pre>
+                </section>
+                <section>
+                    <h2>urls</h2>
+                    <p>In python2, the url libraries dealt with bytes, in python3 they're text apis which use UTF-8 for url encoding</p>
+                    Use <code>yelp_uri</code> to get the python3 behaviour in python2.
+                </section>
+                <section>
+                    <h2>http</h2>
+                    <p>http itself is a protocol of bytes.  In both py2 and py3, the low-level <code>Response</code> objects will generally give you <code>bytes</code> objects (for instance when accessing <code>.body</code>).</p>
+                    <p>To work with text objects, generally pick some higher-level abstraction such as the <code>requests</code> library.</p>
+                </section>
+                <section>
+                    <h2>failures of py3</h2>
+                    They couldn't get everything right!
+                    <ul>
+                        <li>surrogateescape - fake characters hidden in text strings to work with POSIX filesystem apis</li>
+                        <li>PEP3333 - WSGI for py3.  As specced, the wsgi environ is <strong>latin1</strong> decoded text (<strong>wested bias</strong>!  mojibake unless careful!).  <code>.encode('latin1').decode('UTF-8')</code> any time you need to access data</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>links</h2>
+                    <ul>
+                        <li><a href="https://docs.python.org/3.5/whatsnew/3.0.html">What's new in Python3.0</a></li>
+                        <li><a href="http://six.readthedocs.io/">six docs</a></li>
+                        <li><a href="https://bitbucket.org/gutworth/six/src/tip/six.py">six.py source</a></li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+        <script src="bower_components/jquery/jquery.min.js"></script>
+        <script src="bower_components/reveal.js/js/reveal.min.js"></script>
+        <script src="bower_components/highlightjs/highlight.pack.js"></script>
+        <script type="text/javascript">
+            Reveal.initialize({
+                history: true,
+                transition: 'linear',
+                keyboard: {
+                    39: 'next',
+                    37: 'prev'
+                }
+            });
+            hljs.initHighlightingOnLoad();
+        </script>
+    </body>
+
+</html>
