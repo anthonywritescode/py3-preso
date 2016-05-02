@@ -9,7 +9,7 @@ pushd demo
 git checkout gh-pages
 git config user.name "Travis-CI"
 git config user.email "asottile@umich.edu"
-git rm *
+git rm * -rf
 popd
 
 make
