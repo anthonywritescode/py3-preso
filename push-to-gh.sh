@@ -12,13 +12,7 @@ git config user.email "asottile@umich.edu"
 git rm * -rf
 popd
 
-make
-mkdir -p demo/assets
-mkdir -p demo/bower_components
-cp assets/*{.css,.png} demo/assets
-cp -r bower_components/{reveal.js,highlightjs,jquery} demo/bower_components
-cp index.htm demo
-cp .travis.yml demo/
+cp -r build index.htm .travis.yml demo/
 
 cd demo
 git add .
