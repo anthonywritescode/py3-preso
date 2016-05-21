@@ -1,7 +1,9 @@
-pre-commit-preso
+py3-preso
 ================
 
-A presentation about http://pre-commit.com
+A quick presentation about porting to python3
+
+See http://asottile.github.io/py3-preso
 
 
 Directions:
