@@ -302,7 +302,7 @@ PyObject* signature = PySass_Object_Bytes(sass_function);
                     They couldn't get everything right!
                     <ul>
                         <li>surrogateescape - fake characters hidden in text strings to work with POSIX filesystem apis</li>
-                        <li>PEP3333 - WSGI for py3.  As specced, the wsgi environ is <strong>latin1</strong> decoded text (<strong>wested bias</strong>!  mojibake unless careful!).  <code>.encode('latin1').decode('UTF-8')</code> any time you need to access data</li>
+                        <li>PEP3333 - WSGI for py3.  As specced, the wsgi environ is <strong>latin1</strong> decoded text (<strong>western bias</strong>!  mojibake unless careful!).  <code>.encode('latin1').decode('UTF-8')</code> any time you need to access data</li>
                     </ul>
                 </section>
                 <section>
