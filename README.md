@@ -3,7 +3,7 @@ py3-preso
 
 A quick presentation about porting to python3
 
-See http://anthonywritescode.github.io/py3-preso
+See [anthonywritescode.github.io/py3-preso](https://anthonywritescode.github.io/py3-preso)
 
 
 Directions:
