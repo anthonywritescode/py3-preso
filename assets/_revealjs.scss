@@ -1,5 +1,6 @@
-@import '../bower_components/reveal.js/css/theme/template/mixins';
-@import '../bower_components/reveal.js/css/theme/template/settings';
+@import '../node_modules/reveal.js/css/reveal';
+@import '../node_modules/reveal.js/css/theme/template/mixins';
+@import '../node_modules/reveal.js/css/theme/template/settings';
 
 $mainColor: #333;
 $headingColor: #333;
@@ -10,7 +11,7 @@ $linkColor: #119;
 $linkColorHover: #119;
 $headingLineHeight: 1em;
 
-@import '../bower_components/reveal.js/css/theme/template/theme';
+@import '../node_modules/reveal.js/css/theme/template/theme';
 
 .reveal pre {
   background-color: #f5f5f1;

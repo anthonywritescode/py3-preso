@@ -1,6 +1,4 @@
-nenv
-venv
 *.pyc
-bower_components
-node_modules
-build
+/build
+/node_modules
+/venv
