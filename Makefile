@@ -12,7 +12,7 @@ node_modules: package.json
 build:
 	mkdir $@
 
-build/%.css: assets/%.scss build node_modules | venv
+build/%.css: assets/%.scss $(wildcard assets/*.scss) build node_modules | venv
 	venv/bin/sassc -t compressed $< $@
 
 build/%.png: assets/%.png build
@@ -31,5 +31,5 @@ build-files: build/highlight.pack.min.js
 build-files: build/python-logo.png
 
 clean:
-	rm -rf venv node_modules assets/*.css
+	rm -rf venv node_modules build
 	find -name '*.pyc' -delete
