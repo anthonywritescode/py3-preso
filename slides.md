@@ -200,7 +200,7 @@ Many things which returned lists in py2 now return iterators.  `xrange` is gone 
 In python 2, adding a `str` object to a `unicode` object often just worked.
 In py2, implicit conversion between `bytes` and `text` was allowed via the `US-ASCII` encoding.
 
-```python
+```pycon
 # py2
 >>> 'foo' + u'☃'  # Implicitly 'foo'.decode('US-ASCII') + u'☃'
 u'foo\u2603'
@@ -221,7 +221,7 @@ Each of these are a **western bias**!
 In python3, the `bytes` and `text` types are explicitly separated.
 Mismatching of the two types is a `TypeError`
 
-```python
+```pycon
 # py3
 >>> b'' + ''
 TypeError: can't concat bytes to str
