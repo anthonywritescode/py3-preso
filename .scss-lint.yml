@@ -1,11 +1,8 @@
 linters:
+  ColorVariable:
+    enabled: false
   NameFormat:
     exclude:
-      - 'assets/_revealjs.scss'
-  MergeableSelector:
-    enabled: false
-  SelectorDepth:
-    exclude:
-      - 'assets/_revealjs.scss'
-  ColorVariable:
+      - 'assets/_theme.scss'
+  SingleLinePerSelector:
     enabled: false
