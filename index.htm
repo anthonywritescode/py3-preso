@@ -135,26 +135,26 @@ A few examples:</p>
 </section><section><h2>explicit string types</h2>
 <p>In python 2, adding a <code>str</code> object to a <code>unicode</code> object often just worked.
 In py2, implicit conversion between <code>bytes</code> and <code>text</code> was allowed via the <code>US-ASCII</code> encoding.</p>
-<div class="highlight"><pre><span></span><span class="c1"># py2</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;foo&#39;</span> <span class="o">+</span> <span class="sa">u</span><span class="s1">&#39;☃&#39;</span>  <span class="c1"># Implicitly &#39;foo&#39;.decode(&#39;US-ASCII&#39;) + u&#39;☃&#39;</span>
-<span class="sa">u</span><span class="s1">&#39;foo</span><span class="se">\u2603</span><span class="s1">&#39;</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;💩&#39;</span> <span class="o">+</span> <span class="sa">u</span><span class="s1">&#39;hi&#39;</span>  <span class="c1"># Implicitly &#39;💩&#39;.decode(&#39;US-ASCII&#39;) + u&#39;hi&#39;</span>
-<span class="o">...</span>
-<span class="ne">UnicodeDecodeError</span><span class="p">:</span> <span class="s1">&#39;ascii&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t decode byte 0xf0 in position 0: ordinal not in range(128)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="sa">u</span><span class="s1">&#39;💩&#39;</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>  <span class="c1"># implicitly u&#39;💩&#39;.encode(&#39;US-ASCII&#39;).decode(&#39;UTF-8&#39;)</span>
-<span class="o">...</span>
-<span class="ne">UnicodeEncodeError</span><span class="p">:</span> <span class="s1">&#39;ascii&#39;</span> <span class="n">codec</span> <span class="n">can</span><span class="s1">&#39;t encode character u&#39;</span>\<span class="n">U0001f4a9</span><span class="s1">&#39; in position 0: ordinal not in range(128)</span>
+<div class="highlight"><pre><span></span><span class="go"># py2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;foo&#39;</span> <span class="o">+</span> <span class="sa">u</span><span class="s1">&#39;☃&#39;</span>  <span class="c1"># Implicitly &#39;foo&#39;.decode(&#39;US-ASCII&#39;) + u&#39;☃&#39;</span>
+<span class="go">u&#39;foo\u2603&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;💩&#39;</span> <span class="o">+</span> <span class="sa">u</span><span class="s1">&#39;hi&#39;</span>  <span class="c1"># Implicitly &#39;💩&#39;.decode(&#39;US-ASCII&#39;) + u&#39;hi&#39;</span>
+<span class="gp">...</span>
+<span class="go">UnicodeDecodeError: &#39;ascii&#39; codec can&#39;t decode byte 0xf0 in position 0: ordinal not in range(128)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">u</span><span class="s1">&#39;💩&#39;</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>  <span class="c1"># implicitly u&#39;💩&#39;.encode(&#39;US-ASCII&#39;).decode(&#39;UTF-8&#39;)</span>
+<span class="gp">...</span>
+<span class="go">UnicodeEncodeError: &#39;ascii&#39; codec can&#39;t encode character u&#39;\U0001f4a9&#39; in position 0: ordinal not in range(128)</span>
 </pre></div>
 <p>Each of these are a <strong>western bias</strong>!</p>
 </section><section><h2>explicit string types</h2>
 <p>In python3, the <code>bytes</code> and <code>text</code> types are explicitly separated.
 Mismatching of the two types is a <code>TypeError</code></p>
-<div class="highlight"><pre><span></span><span class="c1"># py3</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span>
-<span class="ne">TypeError</span><span class="p">:</span> <span class="n">can</span><span class="s1">&#39;t concat bytes to str</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="s1">&#39;☃&#39;</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
-<span class="o">...</span>
-<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;decode&#39;</span>
+<div class="highlight"><pre><span></span><span class="go"># py3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="sa">b</span><span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span>
+<span class="go">TypeError: can&#39;t concat bytes to str</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;☃&#39;</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">AttributeError: &#39;str&#39; object has no attribute &#39;decode&#39;</span>
 </pre></div>
 </section><section><h2>explicit bytes type</h2>
 <ul>
