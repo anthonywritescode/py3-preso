@@ -15,10 +15,10 @@
 }
 
 
-.table {
+.reveal table {
   border-collapse: collapse;
 
-  td {
+  td, th {
     border: 1px solid #000;
     padding: .25em;
   }

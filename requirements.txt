@@ -1,2 +1,2 @@
-libsass
+markdown-to-presentation>=0.0.3
 pre-commit
