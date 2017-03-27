@@ -8,7 +8,6 @@ branches:
         - gh-pages
 env:
     global:
-        - GH_REF: github.com/anthonywritescode/py3-preso
         # GH_TOKEN
         - secure: c6OARL6S/29YmaEqdBxy5wGt4av2ya5gdOyISUk73Xa3QqhjmGZF/NK4ZEmMPOvhR3whCayCrtLwMvOgVQlXPTG+pY3KEkzpHIDTLV52/3pUgrij87ooAOU5fTSYo2WsIplyzIs10A8D7oJ1Smzbjdft9i6UCljXKRA1hAy+S0LJmEQfcHS9EHEpU6aHZkQIg5+EoGwCTw+lSAji6CavD3TV29Yevnnp/oKjn1bogj5bW5LnGxc6Wsc5XRHPFJCVD6FgBf0aEdWuWnD4dFLijTMNVOO3Ip3AG8tjsVgt1UprotEayyFsORQIM+ydQfEchzP6IvgMhsV9VwxD8WPRkoRQxYOzv+ecpO83J263uwMSeXKw75DkwjsnL1+r1l9mu5PhMa5I4Qo0OwCsHKVvSYzsvvJ/mdO1a5hQF4Kvf62ko6I7YHj2Qy8rGvU9uhN5vyl56GXadRE/mbzR3TVgUXMTL7lEOURgo+1x8Oe2YWVaHRp9edEF9YnA+72+1JhUEr2watOn0fuZbar0X1M9ORAV5qQTPmlJK9OF2Ab1llPJ8ac7+333Ei5+ezbP9P4ULIzBAjvITxyzIrTyJWgXjpC1FBNmTWYHcj9xmH3cftk7Q+V3hzoV7OUDU6if+3SbPjAJ8dWRP3dsXOsDfD2o+fp0ZWOAN2OadIHz0Nzt/mA=
 cache:
