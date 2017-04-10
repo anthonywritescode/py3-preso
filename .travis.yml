@@ -2,7 +2,7 @@ language: python
 python: '3.6'
 install: pip install virtualenv
 script: make
-after_success: ./push-to-gh.sh
+after_success: make push
 branches:
     except:
         - gh-pages
