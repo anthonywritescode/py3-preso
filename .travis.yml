@@ -13,4 +13,4 @@ env:
 cache:
     directories:
         - "$HOME/.cache/pip"
-        - "$HOME/.pre-commit"
+        - "$HOME/.cache/pre-commit"
