@@ -120,7 +120,7 @@ A few examples:</p>
 </ul>
 </section><section><h2>moves (cont.)</h2>
 <p><code>six.moves</code> provides easy access to the moved modules.</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">six.moves.urllib_error</span> <span class="kn">import</span> <span class="n">URLError</span>
+<div class="highlight python"><pre><span></span><span class="kn">from</span> <span class="nn">six.moves.urllib_error</span> <span class="kn">import</span> <span class="n">URLError</span>
 <span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">range</span>
 </pre></div>
 </section><section><h2>iterators</h2>
@@ -135,7 +135,7 @@ A few examples:</p>
 </section><section><h2>explicit string types</h2>
 <p>In python 2, adding a <code>str</code> object to a <code>unicode</code> object often just worked.
 In py2, implicit conversion between <code>bytes</code> and <code>text</code> was allowed via the <code>US-ASCII</code> encoding.</p>
-<div class="highlight"><pre><span></span><span class="go"># py2</span>
+<div class="highlight pycon"><pre><span></span><span class="go"># py2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;foo&#39;</span> <span class="o">+</span> <span class="sa">u</span><span class="s1">&#39;☃&#39;</span>  <span class="c1"># Implicitly &#39;foo&#39;.decode(&#39;US-ASCII&#39;) + u&#39;☃&#39;</span>
 <span class="go">u&#39;foo\u2603&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;💩&#39;</span> <span class="o">+</span> <span class="sa">u</span><span class="s1">&#39;hi&#39;</span>  <span class="c1"># Implicitly &#39;💩&#39;.decode(&#39;US-ASCII&#39;) + u&#39;hi&#39;</span>
@@ -149,7 +149,7 @@ In py2, implicit conversion between <code>bytes</code> and <code>text</code> was
 </section><section><h2>explicit string types</h2>
 <p>In python3, the <code>bytes</code> and <code>text</code> types are explicitly separated.
 Mismatching of the two types is a <code>TypeError</code></p>
-<div class="highlight"><pre><span></span><span class="go"># py3</span>
+<div class="highlight pycon"><pre><span></span><span class="go"># py3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="sa">b</span><span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span>
 <span class="go">TypeError: can&#39;t concat bytes to str</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;☃&#39;</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
@@ -196,12 +196,12 @@ This makes it easier to write a correct application which deals with text intern
 <li>In py2 <code>open</code> yielded <code>bytes</code>, in py3, <code>open</code> gives you <code>text</code></li>
 <li>Use <code>io.open</code> to get the python3 behaviour in python2</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;f.txt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight python"><pre><span></span><span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;f.txt&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="c1"># ...</span>
 </pre></div>
 </section><section><h2>subprocesses</h2>
 <p>subprocesses always return <code>bytes</code>.  <code>.decode()</code> their output to get text</p>
-<div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">((</span><span class="s1">&#39;echo&#39;</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
+<div class="highlight python"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">((</span><span class="s1">&#39;echo&#39;</span><span class="p">,</span> <span class="s1">&#39;hi&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span>
 </pre></div>
 </section><section><h2>urls</h2>
 <p>In python2, the url libraries dealt with bytes, in python3 they're text apis which use UTF-8 for url encoding</p>
@@ -211,7 +211,7 @@ This makes it easier to write a correct application which deals with text intern
 <p>To work with text objects, generally pick some higher-level abstraction such as the <code>requests</code> library.</p>
 </section><section><h2>c extensions</h2>
 <p>Relatively rare that you'll need to do this.</p>
-<div class="highlight"><pre><span></span><span class="cp">#if PY_MAJOR_VERSION &gt;= 3</span>
+<div class="highlight c"><pre><span></span><span class="cp">#if PY_MAJOR_VERSION &gt;= 3</span>
 <span class="cp">#define PySass_IF_PY3(three, two) (three)</span>
 <span class="cp">#define PySass_Int_FromLong(v) PyLong_FromLong(v)</span>
 <span class="cp">#define PySass_Bytes_AS_STRING(o) PyBytes_AS_STRING(o)</span>
