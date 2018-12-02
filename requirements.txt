@@ -1,2 +1,2 @@
-markdown-to-presentation==0.0.18
+markdown-to-presentation==0.0.25
 pre-commit
