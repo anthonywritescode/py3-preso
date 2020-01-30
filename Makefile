@@ -2,9 +2,9 @@ all: run-build
 
 venv: requirements.txt
 	rm -rf venv
-	virtualenv venv -ppython3.6
+	virtualenv venv -ppython3
 	venv/bin/pip install -rrequirements.txt
-	venv/bin/pre-commit install -f --install-hooks
+	venv/bin/pre-commit install
 
 .PHONY: run-build
 run-build: venv
