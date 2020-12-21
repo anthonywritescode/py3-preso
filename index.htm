@@ -6,7 +6,8 @@
     </head>
     <body>
         <div class="reveal">
-            <div class="slides"><section><img src="build/python-logo.png" style="float: left"><h2>python3</h2>
+            <div class="slides"><section><img src="build/python-logo.png" style="float: left">
+<h2>python3</h2>
 <h3>an intro</h3>
 </section><section><h3>outline</h3>
 <ul>
@@ -25,7 +26,7 @@
 </section><section><h2>definitions: text</h2>
 <ul>
 <li>human representation</li>
-<li><code>"abc☃💩🐵"</code></li>
+<li><code>&quot;abc☃💩🐵&quot;</code></li>
 <li>string operations (slicing, replacing) are meaningful</li>
 <li>py2: <code>unicode</code>, py3: <code>str</code></li>
 </ul>
@@ -51,7 +52,8 @@
 </div>
 <div class="blob" style="background-color: #4078c0;">
     <h2>app</h2>
-</div></section><section><h2>interfaces</h2>
+</div>
+</section><section><h2>interfaces</h2>
 <ul>
 <li>network, filesystem, camera, etc.</li>
 <li>all speak in <code>byte</code>s</li>
@@ -87,19 +89,19 @@
 <li>turn on the flags on a per-module basis</li>
 </ul>
 </section><section><p><code>from __future__ import unicode_literals</code></p>
-<hr>
+<hr />
 <p>The default type for string literals in code becomes text.
 In python2, strings were by-default <code>bytes</code>.
 To explicitly make a <code>bytes</code> literal, use the <code>b''</code> prefix.</p>
 </section><section><p><code>from __future__ import absolute_import</code></p>
-<hr>
+<hr />
 <ul>
 <li>Imports always start from <code>sys.path</code> roots.</li>
 <li>Importing a module <code>x</code> becomes unambiguous</li>
 <li>Adding a module can't break other modules' imports</li>
 </ul>
 </section><section><p><code>from __future__ import print_function</code></p>
-<hr>
+<hr />
 <ul>
 <li><code>print x</code></li>
 <li>becomes: <code>print(x)</code></li>
@@ -107,7 +109,7 @@ To explicitly make a <code>bytes</code> literal, use the <code>b''</code> prefix
 <li>becomes: <code>print(x, file=sys.stderr)</code></li>
 </ul>
 </section><section><p><code>from __future__ import divison</code></p>
-<hr>
+<hr />
 <p>Not often as relevant.  Division changes to floating point
 division by default in python3.  Use <code>x // y</code> to explicitly do integer division.</p>
 </section><section><h2>moves</h2>
@@ -166,31 +168,11 @@ Mismatching of the two types is a <code>TypeError</code></p>
 <p>The stdlib (wherever possible) now requires text objects where it previously allowed either <code>bytes</code> or <code>text</code>.
 This makes it easier to write a correct application which deals with text internally.</p>
 </section><section><h2>cheat sheet for string types</h2>
-<table>
-<thead><tr>
-<th>have</th>
-<th>want</th>
-<th>code</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>text</td>
-<td>bytes</td>
-<td><code>x.encode('UTF-8')</code></td>
-</tr>
-<tr>
-<td>bytes</td>
-<td>text</td>
-<td><code>x.decode('UTF-8')</code></td>
-</tr>
-<tr>
-<td>object (int, etc.)</td>
-<td>text</td>
-<td><code>six.text_type(x)</code></td>
-</tr>
-</tbody>
-</table>
+<p>| have               | want  | code                |
+| ------------------ | ----- | ------------------- |
+| text               | bytes | <code>x.encode('UTF-8')</code> |
+| bytes              | text  | <code>x.decode('UTF-8')</code> |
+| object (int, etc.) | text  | <code>six.text_type(x)</code>  |</p>
 </section><section><h2>files</h2>
 <ul>
 <li>In py2 <code>open</code> yielded <code>bytes</code>, in py3, <code>open</code> gives you <code>text</code></li>
