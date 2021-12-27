@@ -205,10 +205,10 @@ This makes it easier to write a correct application which deals with text intern
 <span class="cp">#define PySass_Object_Bytes(o) PyObject_Str(o)</span>
 <span class="cp">#endif</span>
 
-<span class="cm">/* ... */</span>
+<span class="cm">/* ... */</span><span class="w"></span>
 
-<span class="n">PyObject</span><span class="o">*</span> <span class="n">py_result</span> <span class="o">=</span> <span class="n">PyObject_CallFunction</span><span class="p">(</span><span class="n">pyfunc</span><span class="p">,</span> <span class="n">PySass_IF_PY3</span><span class="p">(</span><span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="s">&quot;s&quot;</span><span class="p">),</span> <span class="n">path</span><span class="p">);</span>
-<span class="n">PyObject</span><span class="o">*</span> <span class="n">signature</span> <span class="o">=</span> <span class="n">PySass_Object_Bytes</span><span class="p">(</span><span class="n">sass_function</span><span class="p">);</span>
+<span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">py_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PyObject_CallFunction</span><span class="p">(</span><span class="n">pyfunc</span><span class="p">,</span><span class="w"> </span><span class="n">PySass_IF_PY3</span><span class="p">(</span><span class="s">&quot;y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;s&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">path</span><span class="p">);</span><span class="w"></span>
+<span class="n">PyObject</span><span class="o">*</span><span class="w"> </span><span class="n">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PySass_Object_Bytes</span><span class="p">(</span><span class="n">sass_function</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </section><section><h2>failures of py3</h2>
 <p>They couldn't get everything right!</p>
