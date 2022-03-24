@@ -1,4 +1,4 @@
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/anthonywritescode/py3-preso/master.svg)](https://results.pre-commit.ci/latest/github/anthonywritescode/py3-preso/master)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/anthonywritescode/py3-preso/main.svg)](https://results.pre-commit.ci/latest/github/anthonywritescode/py3-preso/main)
 
 py3-preso
 =========
